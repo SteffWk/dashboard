@@ -26,5 +26,5 @@ class Pruefungsleistung:
         
         return Pruefungsleistung(
             namePruefung=d["namePruefung"],
-            note=d.get(note),
+            note=d.get("note"),
         )

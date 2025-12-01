@@ -1,46 +1,40 @@
 class View:
+    """Darstellungsschicht für Kommandozeile."""
 
     @staticmethod
     def headline(text: str):
+        """Gibt Überschrift aus."""
+
         print("\n" + "=" * 50)
         print(text)
         print("=" * 50)
-
-    @staticmethod
-    def zeige_semester(student):
-        View.headline("Semesterübersicht")
-
-        if not student.semester:
-            print("Keine Semester gefunden.")
-            return
-        
-        for sem in student.semester:
-            print(f"\nSemester {sem.semesterNr}")
-
-            if not sem.module:
-                print("  (keine Module)")
-                continue
-            for m in sem.module:
-                print(f"  {m.modulName} (ECTS {m.ects}) -> Endnote: {m.endnote()}")
-
     
     @staticmethod
     def zeige_module(sem):
         """Alle Module eines best. Semesters ausgeben"""
+
         View.headline(f"Module in Semester {sem.semesterNr}")
 
         if not sem.module:
+            print("Keine Module vorhanden.")
+            return
+        
+        for m in sem.module:
             end = m.endnote()
             print(f"{m.modulName} (ECTS: {m.ects}) Endnote: {end}")
 
     @staticmethod
     def zeige_semesterschnitt(sem):
+        """Zeigt Notenschnitt eines Semesters."""
+
         View.headline(f"Semester {sem.semesterNr}: Schnitt")
         print("Schnitt", sem.berechne_semesterschnitt())
 
+    @staticmethod
     def ampel(diff):
+        """Erzeugt textuelle Ampelbewertung anhand Differenz zum Schnittziel."""
         if diff is None:
-            return
+            return "Keine ausreichenden Daten für Bewertung!"
         
         if diff <=0:
             return "GRÜN"
@@ -51,6 +45,8 @@ class View:
 
     @staticmethod
     def zeige_gesamtschnitt(student, schnitt: float, diff: float | None):
+        """Zeigt Gesamtnotenschnitt, Differenz zum Ziel und Ampelbewertung an."""
+
         View.headline("Gesamtschnitt")
 
         gesamt = student.berechne_gesamt_schnitt()
@@ -69,14 +65,17 @@ class View:
         else:
             print("Abweichung vom Ziel nicht berechenbar.")
 
-        #Ampel ausgeben
         print()
         print(View.ampel(diff))
 
     @staticmethod
     def info(msg: str):
+        """Gibt Info-Nachricht aus."""
+
         print(msg)
 
     @staticmethod
     def fehler(msg: str):
+        """Gibt Fehlermeldung aus."""
+
         print("Fehler", msg)

@@ -18,36 +18,33 @@ class CLI:
         while True:
             print("\n=== Notenübersicht Cyber Security ===")
             print("")
-            print("1) Semester anzeigen")
-            print("2) Semester hinzufügen")
-            print("3) Modul hinzufügen")
-            print("4) Prüfungsleistung hinzufügen")
-            print("5) Zielnotenschnitt setzen")
-            print("6) Semester-Durchschnitt")
-            print("7) Gesamt-Durchschnitt")
-            print("8) Speichern")
-            print("9) Module eines Semesters anzeigen")
+            print("1) Semester hinzufügen")
+            print("2) Modul hinzufügen")
+            print("3) Prüfungsleistung hinzufügen")
+            print("4) Zielnotenschnitt setzen")
+            print("5) Semester-Durchschnitt")
+            print("6) Gesamt-Durchschnitt")
+            print("7) Speichern")
+            print("8) Module eines Semesters anzeigen")
             print("0) Beenden")
 
             auswahl = input("Auswahl: ").strip()
 
             if auswahl == "1":
-                View.zeige_semester(self.student)
-            elif auswahl == "2":
                 self.semester_hinzufuegen()
-            elif auswahl == "3":
+            elif auswahl == "2":
                 self.modul_hinzufuegen()
-            elif auswahl == "4":
+            elif auswahl == "3":
                 self.pruefungsleistung_hinzufuegen()
-            elif auswahl == "5":
+            elif auswahl == "4":
                 self.ziel_setzen()
-            elif auswahl == "6":
+            elif auswahl == "5":
                 self.semesterschnitt()
-            elif auswahl == "7":
+            elif auswahl == "6":
                 self.gesamtschnitt()
-            elif auswahl == "8":
+            elif auswahl == "7":
                 self.speichern()
-            elif auswahl == "9":
+            elif auswahl == "8":
                 self.module_anzeigen()
             elif auswahl == "0":
                 print("Programm beendet.")

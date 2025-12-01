@@ -12,18 +12,15 @@ class Modul:
 
     def endnote(self) -> Optional[float]:
         """Durchschnitt der vorhandenen Prüfungsleistungen"""
+
         benotete = [l.note for l in self.leistungen if l.ist_benotet()]
         if not benotete:
             return None
         return round(sum(benotete) / len(benotete), 2)
     
-    def ist_bestanden(self) -> Optional[bool]:
-        n = self.endnote()
-        if n is None:
-            return None
-        return n <= 4.0
-    
     def to_dict(self) -> dict:
+        """Wandelt Modul in Dictionary für die JSON-Speicherung um."""
+
         return {
             "modulName": self.modulName,
             "ects": self.ects,
@@ -32,6 +29,8 @@ class Modul:
     
     @staticmethod
     def from_dict(d: dict) -> "Modul":
+        """Erzeugt Modul-Objekt aus einem Dictionary"""
+
         return Modul(
             modulName=d["modulName"],
             ects=d["ects"],

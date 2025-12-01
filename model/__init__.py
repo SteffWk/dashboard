@@ -1,3 +1,5 @@
+"""Ermöglicht bequeme Importe"""
+
 from .student import Student
 from .semester import Semester
 from .modul import Modul

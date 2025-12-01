@@ -10,6 +10,8 @@ class Semester:
     module: List[Modul] = field(default_factory=list)
 
     def get_modul(self, modulName: str) -> Optional[Modul]:
+        """Sucht in Modulliste nach Modul mit dem angegebenen Namen."""
+
         for m in self.module:
             if m.modulName == modulName:
                 return m
@@ -17,6 +19,7 @@ class Semester:
         
     def berechne_semesterschnitt(self) -> Optional[float]:
         """"ECTS-gewichteter Schnitt über alle Module mit Endnote"""
+
         paare = [(m.endnote(), m.ects) for m in self.module if m.endnote() is not None]
         if not paare:
             return None
@@ -27,6 +30,8 @@ class Semester:
         return round(num / den, 2)
     
     def to_dict(self) -> dict:
+        """Wandelt Semester in Dictionary für die JSON-Speicherung um."""
+
         return {
             "semesterNr": self.semesterNr,
             "module": [m.to_dict() for m in self.module],
@@ -34,6 +39,8 @@ class Semester:
     
     @staticmethod
     def from_dict(d:dict) -> "Semester":
+        """Erzeugt Semester-Objekt aus Dictionary."""
+
         return Semester(
             semesterNr=d["semesterNr"],
             module=[Modul.from_dict(m) for m in d.get("module", [])],

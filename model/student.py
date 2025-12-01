@@ -12,6 +12,8 @@ class Student:
     semester: List[Semester] = field(default_factory=list)
 
     def get_semester(self, semesterNr: int) -> Optional[Semester]:
+        """Sucht in Semesterliste nach dem angegebenen Semester."""
+
         for s in self.semester:
             if s.semesterNr == semesterNr:
                 return s
@@ -19,6 +21,7 @@ class Student:
         
     def berechne_gesamt_schnitt(self) -> Optional[float]:
         """Berechnet Gesamtschnitt aller Module mit Endnote"""
+
         paare = []
         for sem in self.semester:
             for m in sem.module:
@@ -43,6 +46,8 @@ class Student:
         return round(g - self.zielNotenschnitt, 2)
     
     def to_dict(self) -> dict:
+        """Wandelt Student in Dictionary um."""
+
         return{
             "zielNotenschnitt": self.zielNotenschnitt,
             "semester": [s.to_dict() for s in self.semester],
@@ -50,6 +55,7 @@ class Student:
     
     @staticmethod
     def from_dict(d: dict) -> "Student":
+        """Erzeugt Student aus einem Dictionary, das aus JSON geladen wurde."""
         ziel = d.get("zielNotenschnitt", 2.0)
         st = Student(ziel)
         st.semester = [Semester.from_dict(s) for s in d.get("semester", [])]
